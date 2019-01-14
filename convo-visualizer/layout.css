@@ -1,6 +1,16 @@
+:root {
+  --person-1: mediumseagreen;
+  --person-2: palevioletred;
+}
+
 body, html {
   width: 100%;
   height: 100%;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 10px;
 }
 
 body {
@@ -12,9 +22,6 @@ body {
 .container {
   max-width: 992px;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin: 0 auto;
 }
 
@@ -23,3 +30,20 @@ svg {
   height: 100%;
 }
 
+.data {
+  height: 100%;
+}
+
+.general {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.general-person {
+  margin: 1rem;
+}
+
+.general-name {
+  font-size: 2rem;
+}
