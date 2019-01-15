@@ -45,5 +45,31 @@ svg {
 }
 
 .general-name {
+  position: relative;
   font-size: 2rem;
+}
+
+.general-name::before {
+  content: '\25C9';
+  position: absolute;
+  left: -3rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.general-name.first::before {
+  color: var(--person-1);
+}
+
+.general-name.second::before {
+  color: var(--person-2);
+}
+
+.general-totals {
+  font-size: 1.5rem;
+  font-weight: lighter;
+}
+
+.general-totals > * {
+  margin: 1rem 0;
 }
