@@ -57,11 +57,11 @@ svg {
   transform: translateY(-50%);
 }
 
-.general-name.first::before {
+.first .general-name::before {
   color: var(--person-1);
 }
 
-.general-name.second::before {
+.second .general-name::before {
   color: var(--person-2);
 }
 

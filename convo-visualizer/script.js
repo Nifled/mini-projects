@@ -1,12 +1,19 @@
 // UI element queries
-const PERSON_1_NAME = ".general-name.first";
-const PERSON_2_NAME = ".general-name.second";
+const PERSON_1_NAME = ".first .general-name";
+const PERSON_1_MSGS = ".first .messages .value";
+const PERSON_1_WRDS = ".first .words .value";
+const PERSON_1_ACTY = ".first .activity .value";
+const PERSON_2_NAME = ".second .general-name";
+const PERSON_2_MSGS = ".second .messages .value";
+const PERSON_2_WRDS = ".second .words .value";
+const PERSON_2_ACTY = ".second .activity .value";
 
 fetch("manny.json")
   .then(res => res.json())
   .then(data => {
-    document.querySelector(PERSON_1_NAME).innerHTML = data.participants[0].name;
-    document.querySelector(PERSON_2_NAME).innerHTML = data.participants[1].name;
+    d3.select(PERSON_1_NAME).text(data.participants[0].name);
+    d3.select(PERSON_1_MSGS).text(data.participants[0].name);
+    d3.select(PERSON_2_NAME).text(data.participants[1].name);
   });
 
 const sample = [
