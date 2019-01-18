@@ -40,8 +40,8 @@ function start(data) {
   // Most active day
   let aDay = new Date(functions.mostActiveDay(aDaysObj));
   let bDay = new Date(functions.mostActiveDay(bDaysObj));
-  d3.select(PERSON_1_ACTY).text(aDay.toLocaleString());
-  d3.select(PERSON_2_ACTY).text(bDay.toLocaleString());
+  d3.select(PERSON_1_ACTY).text(aDay.toISOString().split("T")[0]);
+  d3.select(PERSON_2_ACTY).text(bDay.toISOString().split("T")[0]);
 
   // var functions is object with util functions;
 }
