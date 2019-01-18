@@ -1,3 +1,9 @@
+fetch("manny.json")
+  .then(res => res.json())
+  .then(data => {
+    start(data);
+  });
+
 // UI element queries
 const PERSON_1_NAME = ".first .general-name";
 const PERSON_1_MSGS = ".first .messages .value";
@@ -8,13 +14,37 @@ const PERSON_2_MSGS = ".second .messages .value";
 const PERSON_2_WRDS = ".second .words .value";
 const PERSON_2_ACTY = ".second .activity .value";
 
-fetch("manny.json")
-  .then(res => res.json())
-  .then(data => {
-    d3.select(PERSON_1_NAME).text(data.participants[0].name);
-    d3.select(PERSON_1_MSGS).text(data.participants[0].name);
-    d3.select(PERSON_2_NAME).text(data.participants[1].name);
-  });
+function start(data) {
+  d3.select(PERSON_1_NAME).text(data.participants[0].name);
+  d3.select(PERSON_2_NAME).text(data.participants[1].name);
+
+  const messages = data.messages;
+  const separated = functions.groupBy(messages, "sender_name");
+
+  const a = separated[Object.keys(separated)[0]]; // person 1
+  const b = separated[Object.keys(separated)[1]]; // person 2
+
+  const aDaysObj = functions.groupByDay(a, "timestamp_ms");
+  const bDaysObj = functions.groupByDay(b, "timestamp_ms");
+
+  // Total messages
+  d3.select(PERSON_1_MSGS).text(a.length.toLocaleString());
+  d3.select(PERSON_2_MSGS).text(b.length.toLocaleString());
+
+  // Total words
+  let aWords = functions.getTotalWords(a, "content");
+  let bWords = functions.getTotalWords(b, "content");
+  d3.select(PERSON_1_WRDS).text(aWords.toLocaleString());
+  d3.select(PERSON_2_WRDS).text(bWords.toLocaleString());
+
+  // Most active day
+  let aDay = new Date(functions.mostActiveDay(aDaysObj));
+  let bDay = new Date(functions.mostActiveDay(bDaysObj));
+  d3.select(PERSON_1_ACTY).text(aDay.toLocaleString());
+  d3.select(PERSON_2_ACTY).text(bDay.toLocaleString());
+
+  // var functions is object with util functions;
+}
 
 const sample = [
   {
