@@ -1,4 +1,4 @@
-fetch("manny.json")
+fetch("dania.json")
   .then(res => res.json())
   .then(data => {
     start(data);
@@ -15,14 +15,18 @@ const PERSON_2_WRDS = ".second .words .value";
 const PERSON_2_ACTY = ".second .activity .value";
 
 function start(data) {
-  d3.select(PERSON_1_NAME).text(data.participants[0].name);
-  d3.select(PERSON_2_NAME).text(data.participants[1].name);
+  const person1 = data.participants[0].name;
+  const person2 = data.participants[1].name;
 
+  d3.select(PERSON_1_NAME).text(person1);
+  d3.select(PERSON_2_NAME).text(person2);
+
+  // var functions is object with util functions;
   const messages = data.messages;
   const separated = functions.groupBy(messages, "sender_name");
 
-  const a = separated[Object.keys(separated)[0]]; // person 1
-  const b = separated[Object.keys(separated)[1]]; // person 2
+  const a = separated[person1]; // person 1
+  const b = separated[person2]; // person 2
 
   const aDaysObj = functions.groupByDay(a, "timestamp_ms");
   const bDaysObj = functions.groupByDay(b, "timestamp_ms");
@@ -43,7 +47,11 @@ function start(data) {
   d3.select(PERSON_1_ACTY).text(aDay.toISOString().split("T")[0]);
   d3.select(PERSON_2_ACTY).text(bDay.toISOString().split("T")[0]);
 
-  // var functions is object with util functions;
+  console.log(aDaysObj);
+  Object.keys(aDaysObj).forEach(dayKey => {
+    const ms = parseInt(dayKey);
+    console.log(new Date(ms).getFullYear());
+  });
 }
 
 const sample = [
