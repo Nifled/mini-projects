@@ -31,6 +31,17 @@ const functions = {
     }, {});
   },
 
+  groupByYear: function(array, property) {
+    return array.reduce((acc, msg) => {
+      let year = new Date(msg[property]).getFullYear();
+      if (!acc[year]) {
+        acc[year] = [];
+      }
+      acc[year].push(msg);
+      return acc;
+    }, {});
+  },
+
   getTotalWords: function(array, property) {
     return array.reduce((acc, msg) => {
       if (!msg.hasOwnProperty(property)) return acc;
