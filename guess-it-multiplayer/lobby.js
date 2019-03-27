@@ -1,23 +1,28 @@
+// Player enters lobby name and game starts once two players are in the same lobby
 (function() {
   const player = {
-    name: "",
+    name: "", // Player is either 'Host' or 'Guest'
     sign: "",
     score: 0
   };
+
+  function $(id) {
+    return document.getElementById(id);
+  }
 
   let score = $("score"),
     triesLeft = $("triesLeft"),
     guessWord = $("guessWord"),
     opponentScore = $("opponentScore");
 
-  let lobbyName = prompt("Enter lobby name:");
-  let game = lobbyName; // game is the channel where the game takes places
-  let lobby = `${lobbyName}Lobby`; // separate channel for lobby
-
+  // PubNub
+  let lobby = prompt("Enter name of lobby");
+  let game = lobby; // game is the channel where the game takes places
+  lobby = lobby + "Lobby"; // separate channel for lobby
   const newUUID = PubNub.generateUUID();
   let isHost = false;
-  let chatEngine = "";
-  let guessWordChatEngine = "";
+  let ChatEngine = "";
+  let GuessWordChatEngine = "";
 
   const pubnubGuessGame = new PubNub({
     uuid: newUUID,
@@ -26,12 +31,28 @@
     ssl: true
   });
 
-  const listener = {
+  listener = {
     presence: function(response) {
       if (response.action === "join") {
         if (response.occupancy < 2) {
-          // Add hereNow() function here
-
+          // Check that game lobby is not full
+          pubnubGuessGame.hereNow(
+            {
+              channels: [game]
+            },
+            function(status, response) {
+              // Unsubscribe if lobby is full
+              if (response.totalOccupancy >= 2) {
+                guessWord.innerHTML = "";
+                window.alert("Lobby is full!");
+                pubnubGuessGame.removeListener(listener);
+                pubnubGuessGame.unsubscribe({
+                  channels: [lobby]
+                });
+                return;
+              }
+            }
+          );
           // Player is the Host
           player.name = "Host";
           player.sign = "H";
@@ -74,8 +95,54 @@
 
   pubnubGuessGame.addListener(listener);
 
-  // Utils
-  function $(id) {
-    return document.getElementById(id);
+  pubnubGuessGame.subscribe({
+    channels: [lobby],
+    withPresence: true
+  });
+
+  function connectToChat() {
+    /* Main Chat
+         Different keys from game keys */
+    ChatEngine = ChatEngineCore.create(
+      {
+        publishKey: "pub-c-308b6469-61b2-4d6b-81d5-28aa3027f249",
+        subscribeKey: "sub-c-f436cc50-5054-11e9-bdf4-8e79f01390ff"
+      },
+      {
+        globalChannel: [game]
+      }
+    );
+
+    /* Guess Word Chat
+         Different keys from above */
+    GuessWordChatEngine = ChatEngineCore.create(
+      {
+        publishKey: "pub-c-abacc93d-bd10-45ca-9549-7b82cdfdab24",
+        subscribeKey: "sub-c-d6093d0c-5055-11e9-82b8-86fda2e42ae9"
+      },
+      {
+        globalChannel: [game]
+      }
+    );
+
+    const client = {
+      uuid: player.name,
+      player: player.name
+    };
+
+    ChatEngine.connect(client.uuid, client);
+    GuessWordChatEngine.connect(client.uuid, client);
+  }
+
+  let canvas = document.getElementById("drawCanvas");
+  let ctx = canvas.getContext("2d");
+  let color = document.querySelector(":checked").getAttribute("data-color");
+
+  function setUpCanvas() {
+    ctx.fillStyle = "WHITE";
+    ctx.fillRect(20, 20, window.innerWidth, window.innerHeight);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = "3";
+    ctx.lineCap = ctx.lineJoin = "round";
   }
 })();
