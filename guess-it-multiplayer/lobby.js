@@ -26,8 +26,8 @@
 
   const pubnubGuessGame = new PubNub({
     uuid: newUUID,
-    publish_key: "pub-c-9939f103-8a9a-429d-88d9-53a6a5d50d39",
-    subscribe_key: "sub-c-50379e00-5053-11e9-bace-daeb5080f5f6",
+    publish_key: "pub-c-39db552e-c90e-45f3-82da-68ed8f6b3b94",
+    subscribe_key: "sub-c-6f162594-5981-11e9-ba87-ca4df85413ac",
     ssl: true
   });
 
@@ -105,8 +105,8 @@
          Different keys from game keys */
     ChatEngine = ChatEngineCore.create(
       {
-        publishKey: "pub-c-308b6469-61b2-4d6b-81d5-28aa3027f249",
-        subscribeKey: "sub-c-f436cc50-5054-11e9-bdf4-8e79f01390ff"
+        publishKey: "pub-c-ad9f340e-95d1-4064-b8f1-5a173d62b113",
+        subscribeKey: "sub-c-9d43b576-5981-11e9-be9b-e284dc0944ea"
       },
       {
         globalChannel: [game]
@@ -117,8 +117,8 @@
          Different keys from above */
     GuessWordChatEngine = ChatEngineCore.create(
       {
-        publishKey: "pub-c-abacc93d-bd10-45ca-9549-7b82cdfdab24",
-        subscribeKey: "sub-c-d6093d0c-5055-11e9-82b8-86fda2e42ae9"
+        publishKey: "pub-c-98088b52-c834-4eee-91d7-b3b3f1ebcd13",
+        subscribeKey: "sub-c-b5476a28-5981-11e9-bacd-ba825bfe5cc2"
       },
       {
         globalChannel: [game]
