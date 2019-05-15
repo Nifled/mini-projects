@@ -1,0 +1,72 @@
+.app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  background: #2c3e50;
+}
+.box {
+  border: 1px solid gray;
+}
+
+.username {
+  margin: 12px auto 7px auto;
+  color: wheat;
+}
+
+  .Botton {
+  color: #fff;
+  background-color: #4d555f;
+  border-color: #303840;
+  padding: 8px;
+  font-weight: bolder;
+}
+
+.roomForm {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+  width: 100%;
+}
+.createRoomBotton {
+color: #fff;
+background-color: #4d555f;
+border-color: #303840;
+padding: 8px;
+font-weight: bolder;
+}
+
+
+.rooms > .room {
+  border: 1px solid rgb(124, 129, 124);
+  padding: 13px;
+  margin: 3px 0px;
+  color: ghostwhite;
+}
+
+.rooms {
+border: 1px solid rgb(64, 68, 64);
+cursor: pointer;
+}
+
+.remote_video_container {
+  left: 0;
+  margin: 0;
+  border: 1px solid rgb(124, 129, 124);
+}
+#localTrack video {
+    border: 3px solid rgb(124, 129, 124);
+    margin: 0px;
+    max-width: 50% !important;
+    background-repeat: no-repeat;
+}
+.spacing {
+  padding: 20px;
+  width: 100%;
+}
+.roomTitle {
+    border: 1px solid rgb(124, 129, 124);
+    padding: 4px;
+    color: dodgerblue;
+}
