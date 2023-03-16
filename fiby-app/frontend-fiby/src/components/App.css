@@ -1,0 +1,28 @@
+.d-flex-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fiby {
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.fiby input, .fiby button {
+  padding: 0.5rem;
+}
+
+.fiby input {
+  margin-right: 1rem;
+}
+
+.fiby span {
+  text-align: center;
+}
+
+.fiby big {
+  font-size: 2rem;
+}

@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+    "target": "ES2020",
+    "sourceMap": true, // maps JS code back to TS which helps with debugging
+    "outDir": "dist"
+  },
+  "include": ["src/**/*"]
+}
